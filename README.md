@@ -1,6 +1,6 @@
 # The String Alphabet — Translator
 
-A static, responsive website for the fictional String Alphabet, including a translator, cipher key, number glyphs, lore archive, double-meaning examples, and the `01/15/2010,20` lore easter egg.
+A static, responsive website for the fictional String Alphabet, including a translator, complete cipher key, number glyphs, lore archive, and double-meaning examples.
 
 ## Run it locally
 1. Download or extract this folder.

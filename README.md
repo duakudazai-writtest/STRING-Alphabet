@@ -1,44 +1,20 @@
-# String Alphabet Translator
+# The String Alphabet
 
-A small, static translator for GitHub Pages. It converts English letters to numeric String Alphabet values and translates supported numeric sequences back to English.
+A small static translator and reference page inspired by the supplied String Alphabet chart.
 
-## Features
-
-- Translate in both directions
-- Reference table for A–Z
-- Short lore and terminology section
-- Copy and clear controls
-- Responsive dark layout
-- Runs entirely in the browser; no backend or dependencies required
+## Files
+- `index.html` — page structure, translator, lore, definitions, examples
+- `style.css` — dark chalkboard-inspired layout
+- `script.js` — translator and symbol reference
 
 ## Run locally
+Open `index.html` in a browser. No build step or server is required.
 
-Open `index.html` in a browser.
-
-## Publish with GitHub Pages
-
+## Publish on GitHub Pages
 1. Create a GitHub repository.
-2. Upload `index.html`, `style.css`, `script.js`, and `README.md` to the repository root.
+2. Upload the four project files to the repository root.
 3. Open **Settings → Pages**.
-4. Under **Build and deployment**, select **Deploy from a branch**.
-5. Choose your main branch and `/ (root)`, then save.
+4. Select **Deploy from a branch**, choose your main branch and `/(root)`, then save.
 
-## Alphabet table
-
-| Letter | Value | Letter | Value |
-|---|---:|---|---:|
-| A | 01 | N | 14 |
-| B | 02 | O | 15 |
-| C | 03 | P | 16 |
-| D | 04 | Q | 17 |
-| E | 05 | R | 18 |
-| F | 06 | S | 19 |
-| G | 07 | T | 20 |
-| H | 08 | U | 21 |
-| I | 09 | V | 22 |
-| J | 10 | W | 23 |
-| K | 11 | X | 24 |
-| L | 12 | Y | 25 |
-| M | 13 | Z | 26 |
-
-The table above defines the ordinary single-letter mapping. Some legacy sequences may use a format outside the letter-by-letter table.
+## Note on symbols
+The source chart uses hand-drawn glyphs. This web version uses Unicode approximations, which can render differently depending on the user's device and fonts. The letter names and pronunciations are included as a reference.

@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101216">
+  <title>The String Alphabet</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="page">
+    <header class="hero">
+      <div>
+        <p class="eyebrow">REFERENCE / TRANSLATOR</p>
+        <h1>The String Alphabet</h1>
+        <p class="subtitle">A language of hidden meanings.</p>
+      </div>
+      <p class="origin">The String Alphabet has an unknown origin. Its age remains a mystery, but rumours say it was used to express gratitude, affection, anger, or other feelings that were difficult to say directly.</p>
+    </header>
+
+    <section class="translator panel">
+      <div class="heading-row">
+        <div><p class="eyebrow">01 / TOOL</p><h2>Translator</h2></div>
+        <div class="switch" role="group" aria-label="Translation direction">
+          <button class="mode active" type="button" data-mode="decode" aria-pressed="true">To English</button>
+          <button class="mode" type="button" data-mode="encode" aria-pressed="false">To String</button>
+        </div>
+      </div>
+      <label for="source">Input</label>
+      <textarea id="source" rows="3" placeholder="Enter text or a String Alphabet sequence" spellcheck="false"></textarea>
+      <div class="control-row">
+        <span id="direction" class="muted">String Alphabet → English</span>
+        <div class="buttons"><button id="clear" class="secondary" type="button">Clear</button><button id="translate" class="primary" type="button">Translate</button></div>
+      </div>
+      <label for="result">Result</label>
+      <textarea id="result" rows="3" readonly placeholder="Translation appears here"></textarea>
+      <div class="control-row bottom-row"><span id="status" class="muted" role="status">Ready</span><button id="copy" class="copy" type="button">Copy result</button></div>
+    </section>
+
+    <section class="panel">
+      <div class="heading-row">
+        <div><p class="eyebrow">02 / REFERENCE</p><h2>Alphabet &amp; Numbers</h2></div>
+        <span class="muted">Letter and digit symbols</span>
+      </div>
+      <div id="alphabet" class="alphabet"></div>
+      <div class="number-heading">Numbers</div>
+      <div id="numbers" class="numbers"></div>
+      <p class="note">The glyphs are shown as text characters in this web version, so their appearance may vary slightly by device and font.</p>
+    </section>
+
+    <section class="panel">
+      <p class="eyebrow">03 / BACKGROUND</p>
+      <h2>The Lore</h2>
+      <div class="lore-columns">
+        <p>It is said that the String Alphabet was once used by a forgotten civilization, passed down through generations in whispers, notes, and private messages. Some believe it was created by people who could not freely express their feelings, so they developed a language understood only by the close, the trusted, or the intended.</p>
+        <p>Over time, the alphabet became more than a way to write. It became a symbol of love, loyalty, betrayal, and even revenge. Today, it is rarely seen. Some say it is still used in secret, written at the edge of letters, in the margins of books, or in messages meant for one person alone. No one knows for sure where it came from, or when it will disappear again.</p>
+      </div>
+    </section>
+
+    <section class="panel">
+      <p class="eyebrow">04 / DEFINITIONS</p>
+      <h2>Reading the symbols</h2>
+      <dl class="definitions">
+        <div><dt>String Alphabet</dt><dd>A symbol-based alphabet used to represent letters and numbers.</dd></div>
+        <div><dt>Glyph</dt><dd>A written symbol that stands for a letter or digit.</dd></div>
+        <div><dt>Sequence</dt><dd>A group of glyphs arranged to form a word, phrase, or coded entry.</dd></div>
+        <div><dt>Archive entry</dt><dd>A stored sequence copied in its original format, including its separators.</dd></div>
+      </dl>
+    </section>
+
+    <section class="panel examples">
+      <p class="eyebrow">05 / EXAMPLES</p>
+      <h2>Common readings</h2>
+      <div class="example-row"><span class="sample">“Thank you”</span><span class="arrow">→</span><span>Can express gratitude or appreciation.</span></div>
+      <div class="example-row"><span class="sample">“I miss you”</span><span class="arrow">→</span><span>Can express absence or a wish for someone to return.</span></div>
+      <div class="example-row"><span class="sample">“Goodbye”</span><span class="arrow">→</span><span>May be a farewell or a promise to meet again.</span></div>
+      <div class="example-row"><span class="sample">“My favourite colour”</span><span class="arrow">→</span><span>Can carry a personal meaning depending on context.</span></div>
+    </section>
+
+    <footer><span>THE STRING ALPHABET</span><span>Runs locally in your browser</span></footer>
+  </main>
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#101116">
+<title>The String Alphabet — Hidden Meaning Translator</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="grain"></div>
+<header class="topbar">
+  <a class="brand" href="#" aria-label="The String Alphabet home"><span class="sigil">ᛝ</span> STRING ARCHIVE</a>
+  <nav><a href="#translator">Translator</a><a href="#dictionary">Cipher key</a><a href="#lore">The lore</a></nav>
+  <button class="quiet-button" id="themeToggle" title="Toggle light mode">◐ <span>THEME</span></button>
+</header>
+<main>
+  <section class="hero">
+    <div class="eyebrow"><span class="live-dot"></span> ARCHIVE ENTRY 001 · ORIGIN UNKNOWN</div>
+    <h1>The String <em>Alphabet</em></h1>
+  </section>
+
+  <section class="translator panel" id="translator">
+    <div class="section-head"><div><span class="kicker">01 / DECODER</span><h2>Translate a message</h2></div><span class="stamp">FIELD TOOL</span></div>
+    <div class="language-bar">
+      <button class="lang active" data-mode="english">ENGLISH</button>
+      <button class="swap" id="swapBtn" aria-label="Swap translation direction">⇄</button>
+      <button class="lang" data-mode="string">STRING ALPHABET</button>
+    </div>
+    <div class="text-panels">
+      <div class="text-panel">
+        <label for="sourceText" id="sourceLabel">YOUR MESSAGE <span>01</span></label>
+        <textarea id="sourceText" placeholder="Write something you wish you could say..." spellcheck="false">I love you</textarea>
+        <div class="input-foot"><span id="charCount">9 characters</span><button id="clearBtn" class="text-action">CLEAR ×</button></div>
+      </div>
+      <div class="text-panel output-panel">
+        <label id="outputLabel">STRING TRANSLATION <span>02</span></label>
+        <div id="outputText" class="output-text" aria-live="polite"></div>
+        <div class="input-foot"><span id="translationNote">A message between the lines.</span><button id="copyBtn" class="text-action">COPY ↗</button></div>
+      </div>
+    </div>
+    <div class="translator-bottom">
+      <div class="mode-note"><span class="tiny-sigil">✳</span><span id="modeNote">Letters become symbols. The meaning may become something more.</span></div>
+      <button class="primary-button" id="translateBtn">TRANSLATE MESSAGE <span>↗</span></button>
+    </div>
+  </section>
+
+  <section class="examples panel">
+    <div class="section-head"><div><span class="kicker">04 / DOUBLE READINGS</span><h2>Words beneath words</h2></div></div>
+    <div class="example-list">
+      <div><span class="example-glyph">01</span><p><strong>“Thank you.”</strong><small>Surface meaning: gratitude.</small></p><span class="example-meaning">“I'll always remember your kindness.”</span></div>
+      <div><span class="example-glyph">02</span><p><strong>“My favourite colour is blue.”</strong><small>Surface meaning: a preference.</small></p><span class="example-meaning">“You're my favourite person.”</span></div>
+      <div><span class="example-glyph">03</span><p><strong>“I miss you.”</strong><small>Surface meaning: absence.</small></p><span class="example-meaning">“A part of my day still waits for you.”</span></div>
+      <div><span class="example-glyph">04</span><p><strong>“Goodbye.”</strong><small>Surface meaning: farewell.</small></p><span class="example-meaning">“I'll find you again.” — or “This is the end.”</span></div>
+      <div><span class="example-glyph">05</span><p><strong>“01/15/2010,20”</strong><small>A coded date and number.</small></p><span class="example-meaning">“I love you.” — according to one popular archive legend.</span></div>
+    </div>
+  </section>
+
+  <footer><div class="footer-brand"><span class="sigil">ᛝ</span> THE STRING ARCHIVE</div><p>Unknown origin. Uncertain meanings. Unfinished translation.</p><span class="footer-mark">END OF ENTRY · 001</span></footer>
+</main>
+<script src="script.js"></script>
+</body>
+</html>

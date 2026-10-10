@@ -1,23 +1,44 @@
-# The String Alphabet — Translator
+# String Alphabet Translator
 
-A static, responsive website for the fictional String Alphabet, including a translator, complete cipher key, number glyphs, lore archive, and double-meaning examples.
+A small, static translator for GitHub Pages. It converts English letters to numeric String Alphabet values and translates supported numeric sequences back to English.
 
-## Run it locally
-1. Download or extract this folder.
-2. Open `index.html` in a browser.
-3. No build tools or API keys are required.
+## Features
+
+- Translate in both directions
+- Reference table for A–Z
+- Short lore and terminology section
+- Copy and clear controls
+- Responsive dark layout
+- Runs entirely in the browser; no backend or dependencies required
+
+## Run locally
+
+Open `index.html` in a browser.
 
 ## Publish with GitHub Pages
-1. Create a new GitHub repository (for example, `string-alphabet-translator`).
-2. Upload `index.html`, `style.css`, `script.js`, and this README to the repository root.
-3. Open **Settings → Pages**.
-4. Under **Build and deployment**, choose **Deploy from a branch**.
-5. Select the `main` branch and `/ (root)`, then press **Save**.
-6. Wait for GitHub Pages to publish your site; the URL will appear in the Pages settings.
 
-## Notes
-- This is a fictional, custom substitution cipher, not a verified historical language.
-- The glyph mapping is a stylized digital interpretation of the handwritten reference; some symbols are approximations because several handwritten glyphs are ambiguous.
-- Ordinary letters are converted one-for-one. Spaces and punctuation are preserved.
-- The archive convention maps `01/15/2010,20` to the String glyph spelling of `I LOVE YOU`; decoding those glyphs returns `I LOVE YOU`.
-- Translation is local in the browser; no text is sent to a server.
+1. Create a GitHub repository.
+2. Upload `index.html`, `style.css`, `script.js`, and `README.md` to the repository root.
+3. Open **Settings → Pages**.
+4. Under **Build and deployment**, select **Deploy from a branch**.
+5. Choose your main branch and `/ (root)`, then save.
+
+## Alphabet table
+
+| Letter | Value | Letter | Value |
+|---|---:|---|---:|
+| A | 01 | N | 14 |
+| B | 02 | O | 15 |
+| C | 03 | P | 16 |
+| D | 04 | Q | 17 |
+| E | 05 | R | 18 |
+| F | 06 | S | 19 |
+| G | 07 | T | 20 |
+| H | 08 | U | 21 |
+| I | 09 | V | 22 |
+| J | 10 | W | 23 |
+| K | 11 | X | 24 |
+| L | 12 | Y | 25 |
+| M | 13 | Z | 26 |
+
+The table above defines the ordinary single-letter mapping. Some legacy sequences may use a format outside the letter-by-letter table.

@@ -1,69 +1,102 @@
-const letters = {
-a:["λ","Oh-ne"],b:["♧","Toh-vu"],c:["∴","Si"],d:["∷","Dah"],e:["⋊","Fuh"],f:["╫","Eck"],g:["◉","Vech"],h:["⊥","Hah"],i:["‡","Tz"],j:["☾","Juh"],k:["⋈","Kah"],l:["♩","Luh"],m:["⋏","Mih"],
-n:["⋋","Neh"],o:["◯","Oo"],p:["ϯ","Pah"],q:["◇","Kuh"],r:["¿","Ruh"],s:["≋","Seh"],t:["⟁","Tuh"],u:["÷","Vuh"],v:["Ⅴ","Vee"],w:["☉","Wah"],x:["✳","Xeh"],y:["ψ","Yuh"],z:["卌","Zeh"]
+// String Alphabet reference table and translator.
+// The special archive sequence is supported as a complete phrase token.
+const alphabet = {
+  a: "01", b: "02", c: "03", d: "04", e: "05", f: "06",
+  g: "07", h: "08", i: "09", j: "10", k: "11", l: "12",
+  m: "13", n: "14", o: "15", p: "16", q: "17", r: "18",
+  s: "19", t: "20", u: "21", v: "22", w: "23", x: "24",
+  y: "25", z: "26"
 };
-const digits = {"0":"◇","1":"Ⅰ","2":"☾","3":"≋","4":"∴","5":"◉","6":"⋈","7":"♧","8":"⊙","9":"↗"};
-const reverseLetters = Object.fromEntries(Object.entries(letters).map(([k,v])=>[v[0],k]));
-const reverseDigits = Object.fromEntries(Object.entries(digits).map(([k,v])=>[v,k]));
-const source = document.querySelector("#sourceText"), output = document.querySelector("#outputText");
-let mode = "english";
-function encode(text){
- const trimmed=text.trim();
- // Archive convention: the legendary date is a special alias for the String phrase "I LOVE YOU".
- if(trimmed==="01/15/2010,20") return encodeLetters("I LOVE YOU");
- return encodeLetters(text);
+
+const phraseMap = {
+  "01/15/2026,20": "i love you"
+};
+const reversePhraseMap = Object.fromEntries(
+  Object.entries(phraseMap).map(([code, phrase]) => [phrase, code])
+);
+
+const grid = document.querySelector("#alphabet-grid");
+for (const [letter, value] of Object.entries(alphabet)) {
+  const cell = document.createElement("div");
+  cell.className = "letter-cell";
+  cell.innerHTML = `<span class="letter">${letter.toUpperCase()}</span><span class="value">${value}</span>`;
+  grid.appendChild(cell);
 }
-function encodeLetters(text){return [...text].map(ch=>{const low=ch.toLowerCase();if(letters[low])return letters[low][0];if(digits[ch])return digits[ch];return ch;}).join("");}
-function decode(text){
- const result=[...text].map(ch=>reverseLetters[ch]||reverseDigits[ch]||ch).join("");
- // Normalize the phrase to match the requested canonical English output.
- if(result.replace(/\\s+/g," ").trim().toLowerCase()==="i love you") return "I LOVE YOU";
- return result;
+
+let mode = "decode";
+const source = document.querySelector("#source");
+const result = document.querySelector("#result");
+const status = document.querySelector("#status");
+const modeNote = document.querySelector("#mode-note");
+
+document.querySelectorAll(".mode").forEach(button => {
+  button.addEventListener("click", () => {
+    mode = button.dataset.mode;
+    document.querySelectorAll(".mode").forEach(item => {
+      const active = item === button;
+      item.classList.toggle("active", active);
+      item.setAttribute("aria-pressed", String(active));
+    });
+    modeNote.textContent = mode === "decode" ? "String Alphabet → English" : "English → String Alphabet";
+    source.placeholder = mode === "decode" ? "Enter a String Alphabet sequence" : "Enter English text";
+    result.value = "";
+    status.textContent = "Ready";
+  });
+});
+
+function encode(text) {
+  const normalized = text.toLowerCase().trim();
+  if (reversePhraseMap[normalized]) return reversePhraseMap[normalized];
+  return normalized.split("").map(char => {
+    if (alphabet[char]) return alphabet[char];
+    if (char === " ") return "/";
+    return char;
+  }).join(" ");
 }
-function hiddenMeaning(text){
- const t=text.trim().toLowerCase().replace(/[.!?]+$/,"");
- const meanings={
- "i love you":"“I love you” — a confession hidden in plain sight.",
- "thank you":"“I'll always remember your kindness.”",
- "my favourite colour is blue":"“You're my favourite person.”",
- "my favorite color is blue":"“You're my favourite person.”",
- "i miss you":"“A part of my day still waits for you.”",
- "goodbye":"“I'll find you again.” — or “This is the end.”",
- "i hate you":"“I'm afraid of losing you.”"
- };
- return meanings[t]||"In String lore, the literal words may conceal a private feeling known only to the sender and reader.";
+
+function decode(text) {
+  const normalized = text.trim().toLowerCase();
+  if (phraseMap[normalized]) return phraseMap[normalized];
+
+  // Convert common separated number sequences to letters.
+  // Slash marks a word boundary; spaces and commas separate values.
+  const tokens = normalized.replace(/,/g, " ").replace(/\//g, " / ").split(/\s+/).filter(Boolean);
+  return tokens.map(token => {
+    if (token === "/") return " ";
+    const entry = Object.entries(alphabet).find(([, value]) => value === token);
+    return entry ? entry[0] : token;
+  }).join("").replace(/\s+/g, " ").trim();
 }
-function translate(){
- const val=source.value;
- if(mode==="english"){
-   output.textContent=encode(val);
-   document.querySelector("#outputLabel").innerHTML='STRING TRANSLATION <span>02</span>';
-   document.querySelector("#translationNote").textContent="A message between the lines.";
- }else{
-   output.textContent=decode(val);
-   document.querySelector("#outputLabel").innerHTML='ENGLISH READING <span>02</span>';
-   document.querySelector("#translationNote").textContent="Decoded using the current cipher key.";
- }
- document.querySelector("#charCount").textContent=`${val.length} character${val.length===1?"":"s"}`;
- document.querySelector("#meaningText").textContent=mode==="english"?hiddenMeaning(val):"The archive warns that a decoded sentence may carry a second, personal meaning.";
-}
-function setMode(next){
- mode=next;
- document.querySelectorAll(".lang").forEach(b=>b.classList.toggle("active",b.dataset.mode===mode));
- document.querySelector("#sourceLabel").innerHTML=(mode==="english"?'YOUR MESSAGE':'STRING GLYPHS')+' <span>01</span>';
- document.querySelector("#modeNote").textContent=mode==="english"?"Letters become symbols. The meaning may become something more.":"Read the symbols back into letters—or try the archive's date legend.";
- translate();
-}
-document.querySelectorAll(".lang").forEach(b=>b.addEventListener("click",()=>setMode(b.dataset.mode)));
-document.querySelector("#swapBtn").addEventListener("click",()=>setMode(mode==="english"?"string":"english"));
-document.querySelector("#translateBtn").addEventListener("click",translate);
-source.addEventListener("input",translate);
-document.querySelector("#clearBtn").addEventListener("click",()=>{source.value="";translate();source.focus();});
-document.querySelector("#copyBtn").addEventListener("click",async()=>{try{await navigator.clipboard.writeText(output.textContent);document.querySelector("#copyBtn").textContent="COPIED ✓";setTimeout(()=>document.querySelector("#copyBtn").textContent="COPY ↗",1300);}catch(e){document.querySelector("#copyBtn").textContent="SELECT TO COPY";}});
-document.querySelectorAll("[data-example]").forEach(b=>b.addEventListener("click",()=>{source.value=b.dataset.example;setMode("english");translate();document.querySelector("#translator").scrollIntoView({behavior:"smooth",block:"start"});}));
-document.querySelector("#themeToggle").addEventListener("click",()=>document.body.classList.toggle("light"));
-const alphaGrid=document.querySelector("#alphabetGrid");
-Object.entries(letters).forEach(([letter,data])=>{const el=document.createElement("div");el.className="glyph-card";el.innerHTML=`<span class="glyph-letter">${letter.toUpperCase()}</span><span class="glyph-symbol">${data[0]}</span><span class="glyph-pronounce">${data[1]}</span>`;alphaGrid.appendChild(el);});
-const numGrid=document.querySelector("#numberGrid");
-Object.entries(digits).forEach(([num,symbol])=>{const el=document.createElement("div");el.className="glyph-card";el.innerHTML=`<span class="glyph-letter">${num}</span><span class="glyph-symbol">${symbol}</span>`;numGrid.appendChild(el);});
-translate();
+
+document.querySelector("#translate").addEventListener("click", () => {
+  const input = source.value.trim();
+  if (!input) {
+    result.value = "";
+    status.textContent = "Enter text to translate.";
+    return;
+  }
+  result.value = mode === "decode" ? decode(input) : encode(input);
+  status.textContent = "Translation complete";
+});
+
+document.querySelector("#clear").addEventListener("click", () => {
+  source.value = "";
+  result.value = "";
+  status.textContent = "Ready";
+  source.focus();
+});
+
+document.querySelector("#copy").addEventListener("click", async () => {
+  if (!result.value) {
+    status.textContent = "Nothing to copy.";
+    return;
+  }
+  try {
+    await navigator.clipboard.writeText(result.value);
+    status.textContent = "Result copied.";
+  } catch {
+    result.focus();
+    result.select();
+    status.textContent = "Select the result and copy it.";
+  }
+});
